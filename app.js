@@ -21,7 +21,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use((req, res, next) => {
-  User.findByPk(1)
+  User.findByPk(2)
     .then((user) => {
       req.user = user;
       next();
@@ -44,7 +44,7 @@ sequelize
   .sync()
   // .sync({ force: true })
   .then((result) => {
-    return User.findByPk(1);
+    return User.findByPk(2);
   })
   .then((us) => {
     if (!us) {
