@@ -7,6 +7,7 @@ const sequelize = require("./database/database");
 
 const indexRoute = require("./routes/index");
 const shopRoute = require('./routes/shop')
+const adminRoute = require('./routes/admin')
 // Create an express app
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(indexRoute);
 app.use(shopRoute)
+app.use('/admin',adminRoute)
 sequelize
   .sync()
   .then((result) => {

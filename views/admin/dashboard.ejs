@@ -1,0 +1,22 @@
+<%- include("../include/base.ejs")  %>
+<link rel="stylesheet" href="/css/admin/admin.css">
+    </head>
+<%- include("../include/header.ejs")  %>
+<main class="main">
+    <% if (products.length > 0) {%>
+    <div class="wrapper">
+        <% products.forEach(prods => { %>
+            <div class="products">
+                <h1><%= prods.title %></h1>
+                <h4> <%= prods.price %> </h4>
+            </div>
+        <% }) %>
+    </div>
+    <% }else{ %>
+        <div class="wrapper-noProds">
+            <h1 class="noProducts" >no products</h1>
+        </div>
+    <% } %>
+</main>
+<%- include("../include/end.ejs")  %>
+
