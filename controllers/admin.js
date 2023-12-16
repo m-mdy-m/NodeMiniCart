@@ -43,3 +43,14 @@ exports.editProducts = (req,res)=>{
     res.redirect('/')
   })
 }
+
+
+exports.delete = (req,res)=>{
+  const id = req.params.prodsId;
+  Products.findByPk(id).then(prods =>{
+    return prods.destroy()
+  }).then(result=>{
+    console.log('user delete');
+    res.redirect('/admin/dashboard')
+  })
+}
