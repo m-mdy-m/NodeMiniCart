@@ -25,7 +25,6 @@ app.use(indexRoute);
 sequelize
   .sync()
   .then((result) => {
-    console.log(result);
     console.log("created table");
   })
   .catch((err) => {
