@@ -10,6 +10,8 @@ exports.getAddProduct = (req, res, next) => {
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
   const price = req.body.price;
+  const user = req.user
+  console.log('user =>', user);
   Product.create({
     title,
     price,
