@@ -1,0 +1,19 @@
+{
+  "name": "nodeminicart",
+  "version": "1.0.0",
+  "description": "A Node.js e-commerce platform with Express, EJS, Sequelize ORM featuring CRUD, one-to-many relationships, and a mock payment system.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-mdy-m/NodeMiniCart.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m-mdy-m/NodeMiniCart/issues"
+  },
+  "homepage": "https://github.com/m-mdy-m/NodeMiniCart#readme"
+}
