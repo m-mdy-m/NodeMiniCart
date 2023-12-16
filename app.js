@@ -18,7 +18,7 @@ app.set("views", "views");
 // Set the static directory for serving static files like images, stylesheets, and scripts
 app.use(express.static(path.join(__dirname, 'public')))
 
-
+app.use(indexRoute)
 // Start the server and listen on port 3000
 app.listen(3000, ()=>{
     console.log('server run on 3000');
