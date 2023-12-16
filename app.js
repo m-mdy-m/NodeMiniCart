@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(indexRoute);
 app.use(shopRoute)
-app.use('/admin',adminRoute)
+app.use(adminRoute)
 sequelize
   .sync()
   .then((result) => {

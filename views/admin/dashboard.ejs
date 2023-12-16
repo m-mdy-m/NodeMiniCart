@@ -12,8 +12,7 @@
             </div>
             <div class="controllersProducts">
                 <a href="/edit-products/<%= prods.id %>?edit=true" class="btn"> EDIT</a>
-                <form action="/admin/delete" method="POST">
-                    <input type="hidden" value="<%= prods.id %>" name="prodsId">
+                <form action="/admin/dashboard/<%= prods.id %>" method="POST">
                     <button class="btn" type="submit" >DELETE</button>
                 </form>
             </div>

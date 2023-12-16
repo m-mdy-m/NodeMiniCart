@@ -43,6 +43,7 @@
   background-color: #0794e6;
   color: wheat;
   text-decoration: none;
+  cursor: pointer;
 }
 .btn:hover{
     background-color: #277e6b;

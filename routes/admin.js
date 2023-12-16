@@ -1,6 +1,8 @@
-const express = require('express')
-const route = express.Router()
-const adminControllers = require("../controllers/admin")
-route.get('/dashboard', adminControllers.getAdmin)
+const express = require("express");
+const route = express.Router();
+const adminControllers = require("../controllers/admin");
+route.get("/admin/dashboard", adminControllers.getAdmin);
 
-module.exports = route
+route.get("/edit-products/:prodsId", adminControllers.getEdit);
+route.post("/edit-products", adminControllers.editProducts);
+module.exports = route;

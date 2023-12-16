@@ -3,16 +3,19 @@
     </head>
 <%- include("../include/header.ejs")  %>
     <main class="main">
-        <form action="/add-products" method="POST" class="addProduct__form">
+        <form action="<% if (editing) {%> /edit-products <%} else{ %> /add-products <% } %>" method="POST" class="addProduct__form">
             <div class="addProduct__form-title">
-                <input type="text" placeholder="title product.." name="title"  required class="input">
+                <input type="text" placeholder="title product.." name="title"  required class="input" value="<% if (editing) { %><%= prods.title %><% } %>">
             </div>
             <div class="addProduct__form-price">
-                <input type="number" placeholder="price product.." name="price" required class="input">
+                <input type="number" placeholder="price product.." name="price" required class="input" value="<% if (editing) {%><%= prods.price %><%} %>">
             </div>
             <div class="addProduct__form-btn">
-                <button type="submit" class="btn">Add product</button>
+                <button type="submit" class="btn"><% if(editing) {%> UPDATE <%} else{%> Add product <% } %></button>
             </div>
+            <% if (editing) { %>
+                <input type="hidden" value="<%= prods.id %>" name="id">
+                <% } %>
         </form>
     </main>
 <%- include("../include/end.ejs")  %>
