@@ -1,25 +1,37 @@
 // Require the necessary packages
-const bodyParser = require("body-parser")
-const express = require("express")
-const path = require('path')
+const bodyParser = require("body-parser");
+const express = require("express");
+const path = require("path");
 
-const indexRoute = require('./routes/index')
+const sequelize = require("./database/database");
+
+const indexRoute = require("./routes/index");
 
 // Create an express app
-const app = express()
+const app = express();
 
 // Middleware for parsing incoming requests with URL-encoded payloads
-app.use(bodyParser.urlencoded({extended : false}))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set the view engine to ejs and the views directory
 app.set("view engine", "ejs");
 app.set("views", "views");
 
 // Set the static directory for serving static files like images, stylesheets, and scripts
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(indexRoute)
+app.use(indexRoute);
+
+sequelize
+  .sync()
+  .then((result) => {
+    console.log("created table");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 // Start the server and listen on port 3000
-app.listen(3000, ()=>{
-    console.log('server run on 3000');
-})
+app.listen(3000, () => {
+  console.log("server run on 3000");
+});
