@@ -1,15 +1,28 @@
-.addProduct__form{
-    
+.addProduct__form {
+  width: 250px;
+  height: 400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  background-color: grey;
+  border-radius: 12px;
 }
-.addProduct__form-title{
-
+.input{
+    font-size: 16px;
+    padding: 4px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
 }
-.addProduct__form-price{
-
+.btn {
+    padding: 4px ;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    outline: none;
 }
-.addProduct__form-btn{
-
-}
-.btn{
-    
+.btn:hover{
+    background-color: #575252;
 }
