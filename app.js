@@ -3,6 +3,8 @@ const bodyParser = require("body-parser")
 const express = require("express")
 const path = require('path')
 
+const indexRoute = require('./routes/index')
+
 // Create an express app
 const app = express()
 
@@ -16,10 +18,6 @@ app.set("views", "views");
 // Set the static directory for serving static files like images, stylesheets, and scripts
 app.use(express.static(path.join(__dirname, 'public')))
 
-// Create a route for the home page
-app.get('/', (req, res) => {
-    res.render('index')
-})
 
 // Start the server and listen on port 3000
 app.listen(3000, ()=>{

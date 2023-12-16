@@ -1,5 +1,5 @@
 exports.getHome = (req,res,next)=>{
-    res.render('home', {
+    res.render('index', {
         title : 'HOME',
         path : req.path,
     })
