@@ -1,33 +1,49 @@
 .wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .products {
-    width: 100px;
-    height: 150px;
-    background-color: gray;
-    border-radius: 12px;
-    box-shadow: 3px 1px 8px 0px rgb(0, 255, 179);
-    display: flex;
-    justify-content: space-evenly;
-    text-transform: uppercase;
-    align-items: center;
-    flex-direction: column;
-    font-size: 20px;
-    font-family: sans-serif;
-  }
-  .wrapper-noProds {
-    width: 100%;
-    height: 100%;
-    font-size: 100px;
-    color: white;
-    font-family: sans-serif;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.products {
+  width: 100px;
+  height: 150px;
+  background-color: gray;
+  border-radius: 12px;
+  box-shadow: 3px 1px 8px 0px rgb(0, 255, 179);
+  display: flex;
+  justify-content: space-evenly;
+  text-transform: uppercase;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+.wrapper-noProds {
+  width: 100%;
+  height: 100%;
+  font-size: 100px;
+  color: white;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.controllersProducts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+.btn {
+  padding: 4px;
+  border-radius: 12px;
+  background-color: #0794e6;
+  color: wheat;
+  text-decoration: none;
+}
+.btn:hover{
+    background-color: #277e6b;
+}

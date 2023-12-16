@@ -10,6 +10,13 @@
                 <h1><%= prods.title %></h1>
                 <h4> <%= prods.price %> </h4>
             </div>
+            <div class="controllersProducts">
+                <a href="/edit-products/<%= prods.id %>?edit=true" class="btn"> EDIT</a>
+                <form action="/admin/delete" method="POST">
+                    <input type="hidden" value="<%= prods.id %>" name="prodsId">
+                    <button class="btn" type="submit" >DELETE</button>
+                </form>
+            </div>
         <% }) %>
     </div>
     <% }else{ %>
