@@ -37,7 +37,10 @@ sequelize
   .then((result) => {
     return User.findByPk(1)
   }).then(us =>{
-    console.log(us);
+    if (!us) {
+      User.create( {name: casual.name , email: casual.email})
+    }
+    return us
   })
   .catch((err) => {
     console.log(err);
