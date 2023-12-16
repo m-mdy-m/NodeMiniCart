@@ -1,0 +1,19 @@
+<%- include("include/base.ejs")  %>
+<link rel="stylesheet" href="/css/home/home.css">
+    </head>
+<%- include("include/header.ejs")  %>
+    <main class="main">
+        <form action="/add-products" method="POST" class="addProduct__form">
+            <div class="addProduct__form-title">
+                <input type="text" placeholder="title product.." required>
+            </div>
+            <div class="addProduct__form-price">
+                <input type="number" placeholder="price product.." required>
+            </div>
+            <div class="addProduct__form-btn">
+                <button type="submit" class="btn">Add product</button>
+            </div>
+        </form>
+    </main>
+<%- include("include/end.ejs")  %>
+

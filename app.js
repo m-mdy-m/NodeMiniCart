@@ -6,7 +6,7 @@ const path = require("path");
 const sequelize = require("./database/database");
 
 const indexRoute = require("./routes/index");
-
+const shopRoute = require('./routes/shop')
 // Create an express app
 const app = express();
 
@@ -21,7 +21,7 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(indexRoute);
-
+app.use(shopRoute)
 sequelize
   .sync()
   .then((result) => {
