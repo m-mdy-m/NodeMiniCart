@@ -2,10 +2,7 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const path = require("path");
-
 const casual = require('casual')
-console.log(casual.name);
-
 const sequelize = require("./database/database");
 const Product = require("./models/products.js");
 const User = require("./models/users.js");
@@ -38,7 +35,7 @@ sequelize
     return User.findByPk(1)
   }).then(us =>{
     if (!us) {
-      User.create( {name: casual.name , email: casual.email})
+      // User.create( {name: casual.name , email: casual.email})
     }
     return us
   })
