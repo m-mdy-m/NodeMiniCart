@@ -1,0 +1,11 @@
+.container{
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: 10% 90%;
+}
+body{
+    box-sizing: border-box;
+    background: linear-gradient(#000000d2,#000);
+}
