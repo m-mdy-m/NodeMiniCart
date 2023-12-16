@@ -2,7 +2,7 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const path = require("path");
-const casual = require('casual')
+const casual = require("casual");
 const sequelize = require("./database/database");
 const Product = require("./models/products.js");
 const User = require("./models/users.js");
@@ -32,18 +32,21 @@ sequelize
   .sync()
   // .sync({ force: true })
   .then((result) => {
-    return User.findByPk(1)
-  }).then(us =>{
+    return User.findByPk(1);
+  })
+  .then((us) => {
     if (!us) {
       // User.create( {name: casual.name , email: casual.email})
     }
-    return us
+    return us;
+  })
+  .then((user) => {
+    console.log("user");
+    // Start the server and listen on port 3000
+    app.listen(3000, () => {
+      console.log("server run on 3000");
+    });
   })
   .catch((err) => {
     console.log(err);
   });
-
-// Start the server and listen on port 3000
-app.listen(3000, () => {
-  console.log("server run on 3000");
-});
