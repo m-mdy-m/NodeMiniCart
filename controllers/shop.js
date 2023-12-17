@@ -62,7 +62,7 @@ exports.getCart = async (req, res) => {
       ],
     });
 
-    const cartItem = products.map((product)=>{
+    const cartItem = await products.map((product)=>{
       product.CartItem = product['cart-item'].dataValues;
       return product
     })
