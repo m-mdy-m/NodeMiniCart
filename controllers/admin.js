@@ -2,11 +2,17 @@ const Products = require("../models/products");
 
 exports.getAdmin = async (req, res, next) => {
   const products = await req.user.getProducts();
-  await res.render("admin/dashboard", {
-    title: "dashboard",
-    path: req.path,
-    products,
-  });
+  try {
+    const products = await req.user.getProducts();
+    res.render("admin/dashboard", {
+      title: "Dashboard",
+      path: req.path,
+      products,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("An error occurred while retrieving the dashboard.");
+  }
 };
 
 exports.getEdit = async (req, res) => {
