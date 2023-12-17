@@ -8,27 +8,22 @@ exports.getAddProduct = (req, res, next) => {
     editing: false,
   });
 };
-exports.postAddProduct = (req, res, next) => {
+exports.postAddProduct = async (req, res, next) => {
   const title = req.body.title;
   const price = req.body.price;
-  req.user
-    .createProduct({
-      title,
-      price,
-    })
-    .then((result) => {
-      console.log("users created");
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const user = await req.user;
+    await user.createProduct({ title, price });
+    res.redirect("/");
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 exports.postCart = async (req, res) => {
   let newQty = 1;
   const id = req.body.prodsId;
-  
+
   try {
     const cart = await req.user.getCart();
     const products = await cart.getProducts({ where: { id: id } });
@@ -41,11 +36,11 @@ exports.postCart = async (req, res) => {
     } else {
       product = await Product.findByPk(id);
       if (!product) {
-        throw new Error('Product not found.');
+        throw new Error("Product not found.");
       }
       await cart.addProduct(product, { through: { qty: newQty } });
     }
-    
+
     console.log("Redirecting to /cart");
     res.redirect("/cart");
   } catch (err) {
@@ -54,31 +49,30 @@ exports.postCart = async (req, res) => {
   }
 };
 
-exports.getCart = (req, res) => {
-  req.user
-    .getCart()
-    .then((cart) => {
-      return cart
-        .getProducts({
-          include: [
-            {
-              model: CartItem,
-              as: "cart-item",
-              attributes: ["qty"],
-            },
-          ],
-        })
-        .then((products) => {
-          const productsWithCartItem = products.map((product) => {
-            product.CartItem = product["cart-item"].dataValues;
-            return product;
-          });
-          res.render("shop/cart", {
-            title: "cart",
-            path: req.path,
-            products: productsWithCartItem,
-          });
-        });
+exports.getCart = async (req, res) => {
+  try {
+    const getCart = await req.user.getCart();
+    const products = await getCart.getProducts({
+      include: [
+        {
+          model: CartItem,
+          as: "cart-item",
+          attributes: ["qty"],
+        },
+      ],
+    });
+
+    const cartItem = products.map((product)=>{
+      product.CartItem = product['cart-item'].dataValues;
+      return product
     })
-    .catch((err) => console.log(err));
+    res.render("shop/cart", {
+      title: "cart",
+      path: req.path,
+      products: cartItem,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
 };
