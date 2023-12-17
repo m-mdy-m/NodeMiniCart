@@ -59,15 +59,15 @@ npm start
 Navigate to `http://localhost:3000` in your web browser to interact with the application. You will be able to:
 
  
-- `**Home (/):**` See the list of manufactured products; add them to the cart with a single click.
+- **`Home (/):`** See the list of manufactured products; add them to the cart with a single click.
 
-- `**Cart (/cart):**`  View products added to the cart and their quantities. No actual checkout process is implemented.
+- **`Cart (/cart):`**  View products added to the cart and their quantities. No actual checkout process is implemented.
 
-- `**Add Products (/add-products):**` As an admin, add new products to the catalog.
+- **`Add Products (/add-products):`** As an admin, add new products to the catalog.
 
-- `**Admin Dashboard (/admin/dashboard):**` Access the admin view to manage products - delete or edit existing entries.
+- **`Admin Dashboard (/admin/dashboard):`** Access the admin view to manage products - delete or edit existing entries.
 
-- `**Edit Products (/edit-products/:idProducts):**` Admins may update a product’s information by navigating here with the specific product ID.
+- **`Edit Products (/edit-products/:idProducts):`** Admins may update a product’s information by navigating here with the specific product ID.
 
 
 
