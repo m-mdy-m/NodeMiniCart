@@ -4,15 +4,15 @@
 <%- include("../include/header.ejs")  %>
         <main class="main">
             <% if (products.length > 0) {%>
-            <div class="wrapper">
+                <div class="wrapper">
                 <% products.forEach(prods => { %>
-                    <div class="products">
-                        <h1><%= prods.title %></h1>
-                        <h4> <%= prods.price %> </h4>
-                        <h4> <%= prods.CartItem.qty %> </h4>
-                    </div>
-                <% }) %>
-            </div>
+                        <div class="products">
+                            <h1><%= prods.title %></h1>
+                            <h4> <%= prods.price %> </h4>
+                            <h4> <%= prods.CartItem.qty %> </h4>
+                        </div>
+                    <% }) %>
+                </div>
             <% }else{ %>
                 <div class="wrapper-noProds">
                     <h1 class="noProducts" >no products</h1>

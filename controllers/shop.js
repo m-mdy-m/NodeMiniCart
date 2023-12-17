@@ -33,31 +33,28 @@ exports.postCart = (req, res) => {
     .getCart()
     .then((cart) => {
       fetchCart = cart;
-      return cart.getProducts({ WHERE: { id: id } });
+      return cart.getProducts({ where: { id: id } });
     })
     .then((pro) => {
       let product;
+
       if (pro.length > 0) {
         product = pro[0];
       }
-      console.log(
-        "products-cart-item.dataValues.qty =>",
-        product["cart-item"].dataValues.qty
-      );
       if (product) {
-        const oldQty = product["cart-item"].dataValues.qty;
-        newQty += oldQty;
-        return product;
+        newQty = product["cart-item"].qty + 1;
+        return product["cart-item"].update({ qty: newQty });
       }
-      return Product.findByPk(id);
-    })
-    .then((product) => {
-      return fetchCart.addProduct(product, {
-        through: { qty: newQty },
-      });
-    })
-    .then(() => {
-      res.redirect("/cart");
+      return Product.findByPk(id)
+        .then((product) => {
+          
+          return fetchCart.addProduct(product, {
+            through: { qty: newQty },
+          });
+        })
+        .then(() => {
+          res.redirect("/cart");
+        });
     });
 };
 
