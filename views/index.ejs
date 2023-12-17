@@ -10,6 +10,12 @@
                     <h1><%= prods.title %></h1>
                     <h4> <%= prods.price %> </h4>
                 </div>
+                <div>
+                    <form action="/cart" method="POST">
+                        <input type="hidden" name="prodsId" value="<%= prods.id %>">
+                        <button type="submit">Cart</button>
+                    </form>
+                </div>
             <% }) %>
         </div>
         <% }else{ %>

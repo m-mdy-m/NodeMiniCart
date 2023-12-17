@@ -7,8 +7,8 @@ const casual = require("casual");
 const sequelize = require("./database/database");
 const Product = require("./models/products.js");
 const User = require("./models/users.js");
-const Cart = require("./models/cart.js")
-const CartItem = require("./models/cart-item.js")
+const Cart = require("./models/cart.js");
+const CartItem = require("./models/cart-item.js");
 const indexRoute = require("./routes/index");
 const shopRoute = require("./routes/shop");
 const adminRoute = require("./routes/admin");
@@ -36,10 +36,10 @@ app.use(adminRoute);
 
 Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Product);
-User.hasOne(Cart)
-Cart.belongsTo(User)
-Cart.belongsToMany(Product,{ through : CartItem })
-Product.belongsToMany(Cart,{ through : CartItem })
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
 sequelize
   .sync()
   // .sync({ force: true })
@@ -53,6 +53,9 @@ sequelize
     return us;
   })
   .then((user) => {
+    // return user.createCart();
+  })
+  .then((result) => {
     // Start the server and listen on port 3000
     app.listen(3000, () => {
       console.log("server run on 3000");
