@@ -20,15 +20,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
-app.use((req, res, next) => {
-  User.findByPk(2)
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+app.use(async (req, res, next) => {
+  try {
+    const user = await User.findByPk(2); 
+    if (!user) {
+      throw new Error("User not found");
+    }
+    req.user = user;
+    next();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("An error occurred on the server");
+  }
 });
 app.use(indexRoute);
 app.use(shopRoute);
@@ -42,8 +45,8 @@ Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
 const startServer = async () => {
   try {
-    // await sequelize.sync();
-    await sequelize.sync({force : true})
+    await sequelize.sync();
+    // await sequelize.sync({force : true})
     let user = await User.findByPk(2);
     if (!user) {
       user = await User.create({ name: casual.name, email: casual.email });
