@@ -25,37 +25,33 @@ exports.postAddProduct = (req, res, next) => {
     });
 };
 
-exports.postCart = (req, res) => {
+exports.postCart = async (req, res) => {
   let newQty = 1;
   const id = req.body.prodsId;
-  let fetchCart;
-  req.user
-    .getCart()
-    .then((cart) => {
-      fetchCart = cart;
-      return cart.getProducts({ where: { id: id } });
-    })
-    .then((pro) => {
-      let product;
+  
+  try {
+    const cart = await req.user.getCart();
+    const products = await cart.getProducts({ where: { id: id } });
 
-      if (pro.length > 0) {
-        product = pro[0];
+    let product;
+    if (products.length > 0) {
+      product = products[0];
+      newQty = product["cart-item"].qty + 1;
+      await product["cart-item"].update({ qty: newQty });
+    } else {
+      product = await Product.findByPk(id);
+      if (!product) {
+        throw new Error('Product not found.');
       }
-      if (product) {
-        newQty = product["cart-item"].qty + 1;
-        return product["cart-item"].update({ qty: newQty });
-      }
-      return Product.findByPk(id)
-        .then((product) => {
-          
-          return fetchCart.addProduct(product, {
-            through: { qty: newQty },
-          });
-        })
-        .then(() => {
-          res.redirect("/cart");
-        });
-    });
+      await cart.addProduct(product, { through: { qty: newQty } });
+    }
+    
+    console.log("Redirecting to /cart");
+    res.redirect("/cart");
+  } catch (err) {
+    console.log("Error in postCart:", err);
+    res.status(500).send("Unable to add product to cart.");
+  }
 };
 
 exports.getCart = (req, res) => {

@@ -53,7 +53,7 @@ sequelize
     return us;
   })
   .then((user) => {
-    return user.createCart();
+    // return user.createCart();
   })
   .then((result) => {
     // Start the server and listen on port 3000
