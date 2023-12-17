@@ -13,7 +13,6 @@ exports.postAddProduct = async (req, res, next) => {
   const price = req.body.price;
   try {
     const user = await req.user;
-    console.log('user=>', user);
     await user.createProduct({ title, price });
     res.redirect("/");
   } catch (err) {

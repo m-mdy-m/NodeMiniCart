@@ -22,7 +22,7 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(async (req, res, next) => {
   try {
-    const user = await User.findByPk(2); 
+    const user = await User.findByPk(1); 
     if (!user) {
       throw new Error("User not found");
     }
@@ -47,7 +47,7 @@ const startServer = async () => {
   try {
     await sequelize.sync();
     // await sequelize.sync({force : true})
-    let user = await User.findByPk(2);
+    let user = await User.findByPk(1);
     if (!user) {
       user = await User.create({ name: casual.name, email: casual.email });
     }
