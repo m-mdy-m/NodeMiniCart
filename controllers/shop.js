@@ -40,34 +40,52 @@ exports.postCart = (req, res) => {
       if (pro.length > 0) {
         product = pro[0];
       }
+      console.log(
+        "products-cart-item.dataValues.qty =>",
+        product["cart-item"].dataValues.qty
+      );
       if (product) {
-        console.log("cart-item =>", CartItem);
-        const oldQty = product.CartItem.qty;
-        console.log("old =>", oldQty);
-        newQty = oldQty + 1;
+        const oldQty = product["cart-item"].dataValues.qty;
+        newQty += oldQty;
         return product;
       }
+      return Product.findByPk(id);
+    })
+    .then((product) => {
       return fetchCart.addProduct(product, {
         through: { qty: newQty },
       });
-      return Product.findByPk(id)
-        .then((data) => {
-          return fetchCart.addProduct(pro, { through: { qty: newQty } });
-        })
-        .then(() => {
-          res.redirect("/cart");
-        });
+    })
+    .then(() => {
+      res.redirect("/cart");
     });
 };
 
 exports.getCart = (req, res) => {
-  req.user.getCart().then((cart) => {
-    return cart.getProducts((products) => {
-      res.render("shop/cart", {
-        title: "cart",
-        path: req.path,
-        products,
-      });
-    });
-  });
+  req.user
+    .getCart()
+    .then((cart) => {
+      return cart
+        .getProducts({
+          include: [
+            {
+              model: CartItem,
+              as: "cart-item",
+              attributes: ["qty"],
+            },
+          ],
+        })
+        .then((products) => {
+          const productsWithCartItem = products.map((product) => {
+            product.CartItem = product["cart-item"].dataValues;
+            return product;
+          });
+          res.render("shop/cart", {
+            title: "cart",
+            path: req.path,
+            products: productsWithCartItem,
+          });
+        });
+    })
+    .catch((err) => console.log(err));
 };
