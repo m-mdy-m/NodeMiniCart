@@ -40,27 +40,21 @@ User.hasOne(Cart);
 Cart.belongsTo(User);
 Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
-sequelize
-  .sync()
-  // .sync({ force: true })
-  .then((result) => {
-    return User.findByPk(2);
-  })
-  .then((us) => {
-    if (!us) {
-      // User.create( {name: casual.name , email: casual.email})
+const startServer = async () => {
+  try {
+    // await sequelize.sync();
+    await sequelize.sync({force : true})
+    let user = await User.findByPk(2);
+    if (!user) {
+      user = await User.create({ name: casual.name, email: casual.email });
     }
-    return us;
-  })
-  .then((user) => {
-    // return user.createCart();
-  })
-  .then((result) => {
-    // Start the server and listen on port 3000
+    await user.createCart();
     app.listen(3000, () => {
-      console.log("server run on 3000");
+      console.log("Server running on port 3000");
     });
-  })
-  .catch((err) => {
+  } catch (err) {
     console.log(err);
-  });
+  }
+};
+
+startServer();
